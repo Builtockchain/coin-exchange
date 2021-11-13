@@ -8,45 +8,21 @@ const Td = styled.td`
 `;
 
 export default class Coin extends Component {
-    // _isMounted = false;
     
     constructor(props) {
         super(props);
-        this.state = {
-            price: this.props.price
-        }
         this.handleClick = this.handleClick.bind(this);
     }
-/*
-    componentDidMount() {
-        // this._isMounted = true;
 
-        const callback = () => {
-            // set the state to a new random value
-            const randomPercentage = 0.995 + Math.random() * 0.01;
-            
-            this.setState(function(oldState){
-                return {
-                    price: oldState.price * randomPercentage
-                };
-
-            });
-        }
-        setInterval( callback, 1000);    
-   
-    }
-    */
-
-    /* componentWillUnmount() {
-        this._isMounted = false;
-      }
-
-    */
-
+    
     handleClick(event){
         // Prevent the default action of submitting the form
         event.preventDefault();
-        
+        this.props.handleRefresh(this.props.ticker);
+
+    }
+    
+    /*    
         const randomPercentage = 0.995 + Math.random() * 0.01;
             
             this.setState(function(oldState){
@@ -56,6 +32,7 @@ export default class Coin extends Component {
 
             });
     }
+    */
 
     render() {
         return (
@@ -63,7 +40,7 @@ export default class Coin extends Component {
             <tr>
                 <Td>{this.props.name}</Td>
                 <Td>{this.props.ticker}</Td>
-                <Td>${this.state.price}</Td>
+                <Td>${this.props.price}</Td>
                 <Td>
                     <form>
                     <button onClick={this.handleClick}>Refresh</button>
@@ -73,7 +50,7 @@ export default class Coin extends Component {
             
         );
         
-    }
+    };
 }
 
 Coin.propTypes = {
